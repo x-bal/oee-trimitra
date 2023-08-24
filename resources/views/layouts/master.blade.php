@@ -161,6 +161,24 @@
                         </a>
                     </div>
 
+                    <div class="menu-item has-sub">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="menu-text">Setting</div>
+                            <div class="menu-caret"></div>
+                        </a>
+
+                        <div class="menu-submenu">
+                            <div class="menu-item">
+                                <a href="{{ route('brokers.index') }}" class="menu-link">
+                                    <div class="menu-text">Broker</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     @endauth
                 </div>
             </div>

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LineController;
 use App\Http\Controllers\MachineController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +41,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('products/list', [ProductController::class, 'list'])->name('products.list');
     Route::resource('products', ProductController::class);
+
+    Route::get('brokers/list', [BrokerController::class, 'list'])->name('brokers.list');
+    Route::get('brokers/{broker:id}/change-status', [BrokerController::class, 'changeStatus'])->name('brokers.change');
+    Route::resource('brokers', BrokerController::class);
+
+    Route::get('topics/list', [TopicController::class, 'list'])->name('topics.list');
+    Route::resource('topics', TopicController::class);
 });
