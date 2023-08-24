@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\TicketController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\LineController;
+use App\Http\Controllers\MachineController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -27,6 +28,15 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('users/get', [UserController::class, 'get'])->name('users.list');
+    Route::get('users/list', [UserController::class, 'list'])->name('users.list');
     Route::resource('users', UserController::class);
+
+    Route::get('lines/list', [LineController::class, 'list'])->name('lines.list');
+    Route::resource('lines', LineController::class);
+
+    Route::get('machines/list', [MachineController::class, 'list'])->name('machines.list');
+    Route::resource('machines', MachineController::class);
+
+    Route::get('products/list', [ProductController::class, 'list'])->name('products.list');
+    Route::resource('products', ProductController::class);
 });

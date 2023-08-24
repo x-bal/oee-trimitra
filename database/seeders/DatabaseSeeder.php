@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('secret'),
             'name' => 'Developer'
         ]);
-        // \App\Models\User::factory(500)->create();
+
+
+        \App\Models\User::factory(10000)->create();
     }
 }

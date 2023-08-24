@@ -16,10 +16,10 @@ class UserController extends Controller
         return view('user.index', compact('title', 'breadcrumbs'));
     }
 
-    public function get(Request $request)
+    public function list(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::orderBy('name', 'asc')->get();
+            $data = User::orderBy('id', 'asc');
 
             return DataTables::of($data)
                 ->addIndexColumn()

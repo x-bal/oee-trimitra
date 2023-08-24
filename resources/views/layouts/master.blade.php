@@ -9,66 +9,86 @@
     <meta content="" name="author" />
 
     <!-- ================== BEGIN core-css ================== -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="{{ asset('/') }}css/vendor.min.css" rel="stylesheet" />
-    <link href="{{ asset('/') }}css/apple/app.min.css" rel="stylesheet" />
-    <link href="{{ asset('/') }}plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="{{ asset('/') }}css/google/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
-
-    <!-- ================== BEGIN page-css ================== -->
-    <link href="{{ asset('/') }}plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
-    <link href="{{ asset('/') }}plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
-    <link href="{{ asset('/') }}plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
-    <link href="{{ asset('/') }}plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
-    <!-- ================== END page-css ================== -->
 
     @stack('style')
 </head>
 
 <body>
-    <div id="app" class="app app-header-fixed app-sidebar-fixed">
+    <!-- BEGIN #loader -->
+    <div id="loader" class="app-loader">
+        <span class="spinner"></span>
+    </div>
+    <!-- END #loader -->
+    <!-- BEGIN #app -->
+    <div id="app" class="app app-header-fixed app-sidebar-fixed app-with-wide-sidebar app-with-light-sidebar">
+        <!-- BEGIN #header -->
         <div id="header" class="app-header">
+            <!-- BEGIN navbar-header -->
             <div class="navbar-header">
-                <a href="index.html" class="navbar-brand"><span class="navbar-logo"><i class="ion-ios-browsers"></i></span> <b class="me-1">{{ config('app.name') }}</b></a>
+                <button type="button" class="navbar-desktop-toggler" data-toggle="app-sidebar-minify">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/dashboard" class="navbar-brand">
+                    <b class="me-1">Kelola</b> Biz
+                </a>
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
             </div>
-
+            <!-- END navbar-header -->
+            <!-- BEGIN header-nav -->
             <div class="navbar-nav">
+                <div class="navbar-item navbar-form"></div>
+
                 <div class="navbar-item navbar-user dropdown">
+                    @auth
                     <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                        <img src="{{ asset('/') }}img/user/user-13.jpg" alt="" />
-                        <span>
-                            <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
-                            <b class="caret"></b>
-                        </span>
+                        <div class="image image-icon bg-gray-800 text-gray-600">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <span class="d-none d-md-inline">{{ auth()->user()->name }}</span> <b class="caret ms-lg-2"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end me-1">
                         <a href="javascript:;" class="dropdown-item">Edit Profile</a>
-                        <a href="javascript:;" class="dropdown-item"><span class="badge bg-danger float-end rounded-pill">2</span> Inbox</a>
+                        <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger float-end">2</span> Inbox</a>
                         <a href="javascript:;" class="dropdown-item">Calendar</a>
                         <a href="javascript:;" class="dropdown-item">Setting</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">Log Out</a>
-                    </div>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                    @else
+                    <a href="#modal-login" class="btn btn-primary" data-bs-toggle="modal"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    @endauth
                 </div>
             </div>
+            <!-- END header-nav -->
         </div>
-
+        <!-- END #header -->
+        <!-- BEGIN #sidebar -->
         <div id="sidebar" class="app-sidebar">
+            <!-- BEGIN scrollbar -->
             <div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+                <!-- BEGIN menu -->
                 <div class="menu">
+                    @auth
                     <div class="menu-profile">
                         <a href="javascript:;" class="menu-profile-link" data-toggle="app-sidebar-profile" data-target="#appSidebarProfileMenu">
                             <div class="menu-profile-cover with-shadow"></div>
-                            <div class="menu-profile-image">
-                                <img src="{{ asset('/') }}img/user/user-13.jpg" alt="" />
+                            <div class="menu-profile-image menu-profile-image-icon bg-gray-900 text-gray-600">
+                                <i class="fa fa-user fs-48px mb-n4"></i>
                             </div>
                             <div class="menu-profile-info">
                                 <div class="d-flex align-items-center">
@@ -77,7 +97,7 @@
                                     </div>
                                     <div class="menu-caret ms-auto"></div>
                                 </div>
-                                <small>Front end developer</small>
+                                <!-- <small>Front end developer</small> -->
                             </div>
                         </a>
                     </div>
@@ -88,90 +108,98 @@
                                 <div class="menu-text">Settings</div>
                             </a>
                         </div>
-                        <div class="menu-item">
-                            <a href="javascript:;" class="menu-link">
-                                <div class="menu-icon"><i class="fa fa-pencil-alt"></i></div>
-                                <div class="menu-text"> Send Feedback</div>
-                            </a>
-                        </div>
-                        <div class="menu-item pb-5px">
-                            <a href="javascript:;" class="menu-link">
-                                <div class="menu-icon"><i class="fa fa-question-circle"></i></div>
-                                <div class="menu-text"> Helps</div>
-                            </a>
-                        </div>
                         <div class="menu-divider m-0"></div>
                     </div>
-
+                    @endauth
                     <div class="menu-header">Navigation</div>
-                    <div class="menu-item has-sub active">
+                    <div class="menu-item active">
+                        <a href="{{ route('dashboard') }}" class="menu-link">
+                            <div class="menu-icon">
+                                <i class="material-icons">home</i>
+                            </div>
+                            <div class="menu-text">Dashboard</div>
+                        </a>
+                    </div>
+
+                    @auth
+                    <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
-                                <i class="ion-ios-pulse"></i>
+                                <i class="fas fa-folder"></i>
                             </div>
                             <div class="menu-text">Data Master</div>
                             <div class="menu-caret"></div>
                         </a>
+
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="{{ route('users.index') }}" class="menu-link">
-                                    <div class="menu-text">Data User</div>
+                                <a href="{{ route('lines.index') }}" class="menu-link">
+                                    <div class="menu-text">Line Process</div>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a href="{{ route('machines.index') }}" class="menu-link">
+                                    <div class="menu-text">Machines</div>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a href="{{ route('products.index') }}" class="menu-link">
+                                    <div class="menu-text">Products</div>
                                 </a>
                             </div>
                         </div>
                     </div>
 
                     <div class="menu-item">
-                        <a href="widget.html" class="menu-link">
+                        <a href="{{ route('users.index') }}" class="menu-link">
                             <div class="menu-icon">
-                                <i class="ion-ios-nutrition bg-blue"></i>
+                                <i class="fas fa-users"></i>
                             </div>
-                            <div class="menu-text">Widgets <span class="menu-label">NEW</span></div>
+                            <div class="menu-text">User Management</div>
                         </a>
                     </div>
 
-                    <div class="menu-item d-flex">
-                        <a href="javascript:;" class="app-sidebar-minify-btn ms-auto" data-toggle="app-sidebar-minify"><i class="ion-ios-arrow-back"></i>
-                            <div class="menu-text">Collapse</div>
-                        </a>
-                    </div>
+                    @endauth
                 </div>
             </div>
         </div>
         <div class="app-sidebar-bg"></div>
         <div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>
 
+
         <div id="content" class="app-content">
 
+            @auth
             <ol class="breadcrumb float-xl-end">
                 @foreach($breadcrumbs as $breadcrumb)
                 <li class="breadcrumb-item"><a href="javascript:;">{{ $breadcrumb }}</a></li>
                 @endforeach
             </ol>
-
+            @endauth
             <h1 class="page-header">{{ $title }}</h1>
 
-            @yield('content')
+            @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show">
+                @foreach($errors->all() as $error)
+                {{ $error }} <br>
+                @endforeach
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+            </div>
+            @endif
 
+            @yield('content')
         </div>
 
-        <a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
     </div>
 
     <!-- ================== BEGIN core-js ================== -->
     <script src="{{ asset('/') }}js/vendor.min.js"></script>
     <script src="{{ asset('/') }}js/app.min.js"></script>
-    <script src="{{ asset('/') }}js/theme/apple.min.js"></script>
+    <script src="{{ asset('/') }}js/theme/google.min.js"></script>
     <!-- ================== END core-js ================== -->
-
-    <!-- ================== BEGIN page-js ================== -->
-    <script src="{{ asset('/') }}plugins/d3/d3.min.js"></script>
-    <script src="{{ asset('/') }}plugins/nvd3/build/nv.d3.min.js"></script>
-    <script src="{{ asset('/') }}plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
-    <script src="{{ asset('/') }}plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
-    <script src="{{ asset('/') }}plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
-    <script src="{{ asset('/') }}js/demo/dashboard-v2.js"></script>
-    <!-- ================== END page-js ================== -->
 
     @stack('script')
 </body>

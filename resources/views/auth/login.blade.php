@@ -1,110 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master', ['title' => 'Login'])
 
-<head>
-    <meta charset="utf-8" />
-    <title>{{ config('app.name', 'Faceid App') }} | Login</title>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-
-    <!-- ================== BEGIN core-css ================== -->
-    <link href="{{ asset('/') }}css/vendor.min.css" rel="stylesheet" />
-    <link href="{{ asset('/') }}css/apple/app.min.css" rel="stylesheet" />
-    <link href="{{ asset('/') }}plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
-    <!-- ================== END core-css ================== -->
-</head>
-
-<body class='pace-top'>
-    <!-- BEGIN #loader -->
-    <div id="loader" class="app-loader">
-        <span class="spinner"></span>
-    </div>
-    <!-- END #loader -->
-
-    <!-- BEGIN #app -->
-    <div id="app" class="app">
-        <!-- BEGIN login -->
-        <div class="login login-with-news-feed">
-            <!-- BEGIN news-feed -->
-            <div class="news-feed">
-                <div class="news-image" style="background-image: url({{ asset('/') }}img/login-bg/login-bg-11.jpg)"></div>
-                <div class="news-caption">
-                    <h4 class="caption-title"><b>Faceid</b> App</h4>
-                    <p>
-                        Download the Color Admin app for iPhone®, iPad®, and Android™. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                </div>
+@section('content')
+<div class="row">
+    <!-- BEGIN col-3 -->
+    <div class="col-xl-3 col-md-6">
+        <div class="widget widget-stats bg-blue">
+            <div class="stats-icon"><i class="fa fa-desktop"></i></div>
+            <div class="stats-info">
+                <h4>TOTAL VISITORS</h4>
+                <p>3,291,922</p>
             </div>
-            <!-- END news-feed -->
-
-            <!-- BEGIN login-container -->
-            <div class="login-container">
-                <!-- BEGIN login-header -->
-                <div class="login-header mb-30px">
-                    <div class="brand">
-                        <div class="d-flex align-items-center">
-                            <span class="logo"><i class="ion-ios-cloud"></i></span>
-
-
-                            <b>Faceid</b> App
-                        </div>
-                        <small>Login dengan akun anda.</small>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-sign-in-alt"></i>
-                    </div>
-                </div>
-                <!-- END login-header -->
-
-                <!-- BEGIN login-content -->
-                <div class="login-content">
-                    <form action="{{ route('login') }}" method="POST" class="fs-13px">
-                        @csrf
-                        <div class="form-floating mb-15px">
-                            <input type="text" class="form-control h-45px fs-13px" placeholder="Username" id="username" name="username" />
-                            <label for="username" class="d-flex align-items-center fs-13px text-gray-600">Username</label>
-
-                            @error('username')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-floating mb-15px">
-                            <input type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" name="password" />
-                            <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
-
-                            @error('password')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="mb-15px">
-                            <button type="submit" class="btn btn-success d-block h-45px w-100 btn-lg fs-14px">Sign me in</button>
-                        </div>
-                        <hr class="bg-gray-600 opacity-2" />
-                        <div class="text-gray-600 text-center text-gray-500-darker mb-0">
-                            &copy; Faceid App All Right Reserved 2023
-                        </div>
-                    </form>
-                </div>
-                <!-- END login-content -->
+            <div class="stats-link">
+                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
-            <!-- END login-container -->
         </div>
-        <!-- END login -->
-
-        <!-- BEGIN scroll-top-btn -->
-        <a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
-        <!-- END scroll-top-btn -->
     </div>
-    <!-- END #app -->
+    <!-- END col-3 -->
+    <!-- BEGIN col-3 -->
+    <div class="col-xl-3 col-md-6">
+        <div class="widget widget-stats bg-info">
+            <div class="stats-icon"><i class="fa fa-link"></i></div>
+            <div class="stats-info">
+                <h4>BOUNCE RATE</h4>
+                <p>20.44%</p>
+            </div>
+            <div class="stats-link">
+                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- END col-3 -->
+    <!-- BEGIN col-3 -->
+    <div class="col-xl-3 col-md-6">
+        <div class="widget widget-stats bg-orange">
+            <div class="stats-icon"><i class="fa fa-users"></i></div>
+            <div class="stats-info">
+                <h4>UNIQUE VISITORS</h4>
+                <p>1,291,922</p>
+            </div>
+            <div class="stats-link">
+                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- END col-3 -->
+    <!-- BEGIN col-3 -->
+    <div class="col-xl-3 col-md-6">
+        <div class="widget widget-stats bg-red">
+            <div class="stats-icon"><i class="fa fa-clock"></i></div>
+            <div class="stats-info">
+                <h4>AVG TIME ON SITE</h4>
+                <p>00:12:23</p>
+            </div>
+            <div class="stats-link">
+                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- END col-3 -->
+</div>
 
-    <!-- ================== BEGIN core-js ================== -->
-    <script src="{{ asset('/') }}js/vendor.min.js"></script>
-    <script src="{{ asset('/') }}js/app.min.js"></script>
-    <script src="{{ asset('/') }}js/theme/apple.min.js"></script>
-    <!-- ================== END core-js ================== -->
-</body>
+<div class="modal fade" id="modal-login">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Form Login</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <form action="{{ route('login') }}" method="post">
+                @csrf
 
-</html>
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autofocus>
+
+                        @error('username')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password">Password</label>
+                        <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autofocus>
+
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                        <label class="form-check-label" for="remember">
+                            {{ __('Remember Me') }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
