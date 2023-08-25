@@ -176,6 +176,12 @@
                                     <div class="menu-text">Broker</div>
                                 </a>
                             </div>
+
+                            <div class="menu-item">
+                                <a href="{{ route('topics.index') }}" class="menu-link">
+                                    <div class="menu-text">Topic</div>
+                                </a>
+                            </div>
                         </div>
                     </div>
 

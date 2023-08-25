@@ -14,4 +14,9 @@ class Machine extends Model
     {
         return $this->belongsTo(Line::class);
     }
+
+    function topics()
+    {
+        return $this->belongsToMany(Topic::class);
+    }
 }
